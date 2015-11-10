@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <tblCoupons CouponId="1" CouponCode="12345" CouponDicsont="99" CouponStart="1343779200" CouponEnd="1346371200" CouponStatus="false" CouponSymbol="%" CouponCount="0"/>
+  <tblCoupons CouponId="3" CouponCode="Astr12" CouponDicsont="10" CouponStart="1346544000" CouponEnd="1348358400" CouponStatus="false" CouponSymbol="$" CouponCount="0"/>
+  <tblCoupons CouponId="5" CouponCode="Astr15" CouponDicsont="25" CouponStart="1346457600" CouponEnd="1348963200" CouponStatus="false" CouponSymbol="%" CouponCount="0"/>
+  <tblCoupons CouponId="75" CouponCode="twitter5" CouponDicsont="5" CouponStart="1349976480" CouponEnd="1356912000" CouponStatus="true" CouponSymbol="$" CouponCount="100"/>
+  <tblCoupons CouponId="76" CouponCode="facebook5" CouponDicsont="5" CouponStart="1349976540" CouponEnd="1356912000" CouponStatus="true" CouponSymbol="$" CouponCount="100"/>
+  <tblCoupons CouponId="77" CouponCode="testr" CouponDicsont="99" CouponStart="1349049600" CouponEnd="1351641600" CouponStatus="true" CouponSymbol="%" CouponCount="80"/>
+  <tblCoupons CouponId="78" CouponCode="test17" CouponDicsont="10" CouponStart="1351245600" CouponEnd="1351498320" CouponStatus="true" CouponSymbol="$" CouponCount="33"/>
+  <tblCoupons CouponId="79" CouponCode="test2" CouponDicsont="10" CouponStart="1351209600" CouponEnd="1351296000" CouponStatus="true" CouponSymbol="%" CouponCount="1"/>
+  <tblCoupons CouponId="83" CouponCode="test4" CouponDicsont="99" CouponStart="1351728000" CouponEnd="1351900800" CouponStatus="true" CouponSymbol="%" CouponCount="1"/>
+  <tblCoupons CouponId="84" CouponCode="test44" CouponDicsont="10" CouponStart="1368316800" CouponEnd="1369958400" CouponStatus="true" CouponSymbol="%" CouponCount="1"/>
+  <tblCoupons CouponId="85" CouponCode="test444" CouponDicsont="50" CouponStart="1369699200" CouponEnd="1369872000" CouponStatus="true" CouponSymbol="$" CouponCount="-1"/>
+</dataset>

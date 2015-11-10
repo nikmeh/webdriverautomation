@@ -1,0 +1,146 @@
+########################################################################
+##
+## Tim Reynolds 
+##
+## log4j configuration file, put this on your classpath
+##
+## LEVELS: FATAL, ERROR, WARN, INFO, DEBUG, TRACE
+## 
+## These levels tell log4j to limit/filter the amount of log output
+## Generally/in production you only want to see ERROR(s) so the 
+## rootLogger is set to ERROR level. rootLogger is the catch-all logger,
+## meaning any Package and/or Class that you don't specifically set
+## to some other LEVEL will use the rootLogger level. In this way your output
+## won't be Overwhelmed with DEBUG statements from some 3rd party library your
+## project includes. SEE your eclipse project/properties/Java Build Path/libs,
+## if all of those jar/libs were set to DEBUG you would not be happy!!!
+##
+## The basic idea is, you're working on some package such as 
+## com.timr.ra.webtest.bid, and you are having some problem figuring
+## out why it is behaving in a certain way. So, you put in some
+## logger.debug("Tell me what's going on here") statements in your code.
+## You know the rootLogger is set to ERROR, and you are not seeing your
+## debug statements. So you OVERRIDE the rootLogger only for the things
+## you are interested in, ie your packages.
+##
+## e.g. log4j.logger.com.timr.ra=DEBUG
+##
+## This tells log4j, anything in my  com.timr.ra package AND anything below it,
+## such as  com.timr.ra.webtest.bid, will be "turned on". So I will see
+## logger.debug("a debug level log statement"), logger.info(" some info ... "),
+## logger.error(" something BAD is an Error") - everything between:
+## DEBUG ... FATAL.
+##
+## Appenders: You will notice there is an additional item on the 
+## log4j.rootLogger line,  FILE. This is a label for what is called
+## an appender. You can use any labels you want, but its best to use ones that
+## have some meaning close to what they do, often you will see:
+## FILE or LOG-FILE or something like this for an appender that sends your statements 
+## to a some log file.  
+##
+## Below you will see lots of lines that begin with: log4j.appender.FILE
+## these are all used to configure your FILE appender. If you called it
+## XYZabc, you would see log4j.appender.XYZabc (don't do that). 
+## You might say, how do I know which one is for the actual log file, if 
+## it could be Labeled anything? In this case you would need to look for 
+## an appender that had a definition for log4j.appender.XYZabc.File=,
+## see the "File" at the endof the line just before '='
+##
+## You can have many appenders, however when starting out you should
+## limit yourself to two, FILE and CONSOLE (stdout).
+########################################################################
+
+# Root logger option
+log4j.rootLogger=ERROR,FILE
+
+################################################
+## FILE - appender Setup
+##
+## You can make the File=SomePathGoesHere either absolute or relative.
+## absolute: log4j.appender.file.File=C:\\YourFullPathNameGoesHere\\Logs\\rideauction.log
+## relative: log4j.appender.FILE.File=.\\logs\\output\\rideauction.log
+##
+## NOTE: In production you would probably use a command-line argument variable for the path
+##       log4j.appender.FILE.File=${LOG_FILE_DIR}/loging.log, this way on your 
+##       local box you pick where LOG_FILE_DIR points to.
+##
+####### SETUP file output location ############
+#log4j.appender.FILE.File=C:\\Users\\timr\\WSMusicDemo\\SeleniumClassWS\\logs\\output\\rideauction.log
+log4j.appender.FILE.File=.\\logs\\output\\linkedin.log
+
+
+#####################################
+## RollingFileAppender - means when your log file reaches MaxFileSize the next statement
+##                       will be written at the beginning of the file, thus Rolling Over
+##                       MaxBackupIndex, says before rolling over make a copy first. 
+##                       MaxBackupIndex = 1, basically means you will have the Current log
+##                       and 1 previous.
+log4j.appender.FILE=org.apache.log4j.RollingFileAppender
+log4j.appender.FILE.MaxFileSize=1MB
+log4j.appender.FILE.MaxBackupIndex=1
+log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
+##
+## ConversionPattern lets you pick the output format you want
+##
+log4j.appender.FILE.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+#log4j.appender.FILE.layout.ConversionPattern=%p %c{1}:%L - %m%n
+
+
+################################################
+##   CONSOLE (stdout)  - appender Setup
+##
+## NOTE: Sometimes folks also refer to CONSOLE as stdout 
+## (Standard Out, linux folks use this term)
+## 
+## The CONSOLE appender is the one that sends data to the user screen,
+## on Windows this would be the command window, for linux its the terminal
+## for Eclipse its the Console Tab (generally seen at the bottom of eclipse)
+## it will be the line with   ...Target=System.out
+##
+## log4j.appender.CONSOLE.Target=System.out
+##
+## I generally set this up when I am running Eclipse so I can see the log messages
+## without having to open the log file.
+## NOTE: you can have different ConversionPattern(s) for different Appenders
+##       in eclipse I don't need to know the Year (yyyy) Mon (MM), or Day(dd)
+##       so it is removed from the pattern: see doc for details on patterns
+################################################
+log4j.appender.CONSOLE.Threshold=TRACE
+log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.Target=System.out
+log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+#log4j.appender.CONSOLE.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
+log4j.appender.CONSOLE.layout.ConversionPattern=%d{HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+
+#######################################################################
+##
+## 90% of the properties in this file don't need to change after you
+## do the initial setup.
+##
+## However, when you are looking from some specific data you may want to 
+## "tune" your configuration. I generally put these type of changes at the
+## end of the file.
+##
+## Change these values when attempting to find a problem in your code
+##
+## NOTE: Below I have added the CONSOLE "Appender"
+##       This tells log4j that, in addition to what is configured above
+##       I want everything with INFO level and above for the package name 
+##       "com.timr.ra" sent to the CONSOLE.
+##
+##      PS: if you add FILE here you will see Double log statements
+##          in your logfile so DONT do this: log4j.logger.com.timr.ra=INFO,CONSOLE,FILE
+##
+#######################################################################
+
+log4j.logger.com.timr.li=DEBUG,CONSOLE
+log4j.logger.com.timr.ra.webtest=WARN
+log4j.logger.com.timr.ra.webtest.bid.TestBidOnRideBusStretchEx=DEBUG
+log4j.logger.com.timr.li.framework.LIPage=ERROR
+
+## above we setup the com.timr.ra package and everything below it to be
+## set at INFO level and add CONSOLE output. Then we get more specific and set the 
+## com.timr.ra.webtest package and every thing below it to WARN
+## finally we get very specific down to the class level and set
+## com.timr.ra.webtest.bin.TheNameOfAClass to DEBUG
